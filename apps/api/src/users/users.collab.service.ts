@@ -35,8 +35,23 @@ export class UserCollabService {
         return userCreated.data;
     }
 
-    async addUserToDeafultTeam(): Promise<string> {
-        return null;
+    async addUserToDeafultTeam(tenant_context:TenantContext,user_id:string): Promise<string> {
+        const newMember = {
+            team_id : tenant_context.TEAM_ID,
+            user_id
+        }
+        const memberAdded = await this.httpService.post<any>(tenant_context.COLLABORATION_HOST_URL + '/teams/'+tenant_context.TEAM_ID +'/members',
+            newMember,
+            {
+                headers
+                    : {
+                    'Authorization': 'Bearer ' + tenant_context.ADMIN_ACCESS_TOKEN,
+                    'Content-Type': 'application/json'
+                }
+            }
+        ).toPromise();
+
+        return memberAdded.data;
     }
 
 }
