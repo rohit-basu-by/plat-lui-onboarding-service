@@ -1,5 +1,6 @@
-import { Controller, Get, Post, Body, Patch, Param, Put, Query, UseInterceptors, Req } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Put, Query, UseInterceptors, Headers } from '@nestjs/common';
 import { UsersService } from './users.service';
+import { User } from './users.interface';
 
 
 @Controller('users')
@@ -15,8 +16,9 @@ export class UsersController {
 
     @Get('/:user_id')
     async fetchUserContext(
-        @Param("user_id") id: string,@Req() request: any
-    ): Promise<any> {
-        return await this.userService.fetchUser(id,request.username, request.tenant_id,request.app_id);
+        @Param("user_id") id: string,
+        @Headers() headers: any
+    ): Promise<User> {
+        return await this.userService.fetchUser(id,headers['x-username'], headers['x-tenantid'],headers['x-appid']);
     }
 }

@@ -3,14 +3,16 @@ import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
 import { UserSchema } from './users.schema';
 import { MongooseModule } from '@nestjs/mongoose';
+import { TenantContextSchema } from './tenant.schema';
+import { UserCollabService } from './users.collab.service';
 
 @Module({
   imports: [
     MongooseModule.forFeature([
-      { name: 'User', schema: UserSchema }
+      { name: 'TenantContext', schema: TenantContextSchema},{ name: 'User', schema: UserSchema }
     ]),HttpModule
   ], 
   controllers: [UsersController],
-  providers: [UsersService]
+  providers: [UsersService,UserCollabService]
 })
 export class UsersModule {}

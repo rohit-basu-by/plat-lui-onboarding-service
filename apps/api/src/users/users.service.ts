@@ -28,7 +28,7 @@ export class UsersService {
                 TENANT_ID: tenant_id,
             });
             const remoteUsrObj = await this.userCollabService.createUser(username, tenant_context);
-            const personalToken = await this.userCollabService.createUserAccessToken(remoteUsrObj.id);
+            const personalToken = await this.userCollabService.createUserAccessToken(tenant_context,remoteUsrObj.id);
 
             const createdUser = new this.userModel({
                 APP_USR_NAME: username,

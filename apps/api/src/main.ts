@@ -8,7 +8,7 @@ async function bootstrap() {
     logger: ["log", "error", "warn", "debug", "verbose"]
   });
   app.useGlobalPipes(new ValidationPipe());
-  app.useGlobalGuards(new AADAuthGaurd(new Reflector()));
-  await app.listen(80);
+  //app.useGlobalGuards(new AADAuthGaurd(new Reflector()));
+  await app.listen(process.env.PORT);
 }
 bootstrap();
