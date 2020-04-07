@@ -8,3 +8,5 @@ export const TenantContextSchema = new mongoose.Schema({
     CREATED_DATE: Date,
     LAST_MODIFIED_DATE: Date
 }, { timestamps: { createdAt: 'CREATED_DATE', updatedAt: 'LAST_MODIFIED_AT' } });
+
+mongoose.set('debug', true);
